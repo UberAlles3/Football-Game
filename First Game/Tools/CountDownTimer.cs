@@ -74,7 +74,7 @@ namespace FootballGame
     }
     private void Init()
     {
-      SetInterval = 1000; // One second default
+      SetInterval = 450; // enough to update clocks every second
       _stpWatch = new Stopwatch();
       _stpWatch.Reset();
       timer.Tick += new EventHandler(TimerTick);

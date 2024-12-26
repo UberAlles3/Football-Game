@@ -10,7 +10,7 @@ namespace FootballGame
 {
   public class CountDownTimer : IDisposable
   {
-    public Stopwatch _stpWatch;
+    public Stopwatch _stpWatch = new Stopwatch();
 
     public Action TimeChanged; // Set this delegate to an Action method that gets called when the time ticks. (Every one second default.)
     public Action TimeExpired; // Set this delegate to an Action method that gets called when the time expires.
@@ -29,9 +29,7 @@ namespace FootballGame
     {
       get 
       {
-        if (_stpWatch == null)
-          _stpWatch = new Stopwatch();
-        return (_max.TotalMilliseconds - _stpWatch.ElapsedMilliseconds) > 0 ? TimeSpan.FromMilliseconds(_max.TotalMilliseconds - _stpWatch.ElapsedMilliseconds) : TimeSpan.FromMilliseconds(0);
+         return (_max.TotalMilliseconds - _stpWatch.ElapsedMilliseconds) > 0 ? TimeSpan.FromMilliseconds(_max.TotalMilliseconds - _stpWatch.ElapsedMilliseconds) : TimeSpan.FromMilliseconds(0);
       }
     }
     
@@ -53,8 +51,9 @@ namespace FootballGame
           return;
         }
 
-        TimeExpired?.Invoke();
         _stpWatch.Stop();
+        TimeExpired?.Invoke();
+        
         timer.Enabled = false;
       }
     }
